@@ -69,6 +69,7 @@ void CourseInfoModel::clear()
     {
         return;
     }
+    m_defaultPosition.clear();
     beginRemoveRows(QModelIndex(), 0, m_infoList.size()-1);
     m_infoList.clear();
     endRemoveRows();

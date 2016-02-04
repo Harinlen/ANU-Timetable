@@ -1,5 +1,5 @@
 # ANU Timetable Generator
-Due to the rough and bizarre timetable check tools provides by ANU, I wrote this tools for students to generate their own timetable.
+Due to the rough and bizarre timetable check tools provided by ANU, I wrote this tool for ANU students to generate their own timetable.
 
 This tool supports Windows XP SP2 and above, Mac OS X 10.7 and above, mainstream desktop Linux.
 

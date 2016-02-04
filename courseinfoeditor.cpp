@@ -242,6 +242,7 @@ void CourseInfoEditor::displayData(const QString &code,
     m_type->setCurrentIndex(type);
     m_position->setText(position);
     m_model->clear();
+    m_model->setDefaultPosition(position);
     m_model->append(timeTable);
     m_courseInfo->hide();
     m_courseInfo->show();

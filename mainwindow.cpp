@@ -15,6 +15,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
+#include <QCloseEvent>
 #include <QBoxLayout>
 #include <QFile>
 #include <QTime>
@@ -40,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     //Set font.
     QFont viewerFont;
-    viewerFont.setPixelSize(10);
+    viewerFont.setPixelSize(12);
     viewerFont.setFamily("Arial");
     m_viewer->setFont(viewerFont);
     m_viewer->setWindowFlags(Qt::Dialog);
@@ -88,6 +89,34 @@ MainWindow::MainWindow(QWidget *parent) :
     m_editor->setRawModel(m_model);
 
     onActionNew();
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    if(m_model->isChanged())
+    {
+        switch(QMessageBox::question(this,
+                                     "Timetable",
+                                     "Timetable is changed, save it?",
+                                     QMessageBox::Yes,
+                                     QMessageBox::No,
+                                     QMessageBox::Cancel))
+        {
+        case QMessageBox::Yes:
+            if(!onActionSave())
+            {
+                event->ignore();
+                return;
+            }
+            break;
+        case QMessageBox::No:
+            event->accept();
+            break;
+        case QMessageBox::Cancel:
+            event->ignore();
+            return;
+        }
+    }
 }
 
 void MainWindow::onActionNew()
